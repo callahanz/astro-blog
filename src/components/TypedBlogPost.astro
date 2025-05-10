@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { Formatter } from 'src/utils/formatter';
+
+interface Props {
+    post: CollectionEntry<'blog'>;
+}
+
+const props = Astro.props;
+const { post } = props;
+const frontmatter = post.data;
+---
+
+<div class="lg:flex">
+    <!-- como le estamos pasando un objeto Image "ver: config.ts" pondremos un componente Image en vez de el html img, de esta forma podemos optimizarlas; si usamos img veremos que simplemente la pondra sin optimizar con el mismo tamaño que tienen, etc. -->
+    <!-- <img
+        class="object-cover w-full h-56 rounded-lg lg:w-64"
+        src={frontmatter.image.src}
+        alt={frontmatter.title}
+    /> -->
+    <Image
+        class="object-cover w-full h-56 rounded-lg lg:w-64"
+        src={frontmatter.image}
+        alt={frontmatter.title}
+        width={500}
+        height={500}
+        quality={'low'}
+        loading={'lazy'}
+        transition:name={`${post.id}-image`}
+    />
+
+    <div class="flex flex-col justify-between py-6 lg:mx-6">
+        <a
+            href={`/posts/${post.id}`}
+            class="text-xl font-semibold text-white hover:underline"
+        >
+            {frontmatter.description}
+        </a>
+
+        <span class="text-sm text-gray-300"
+            >{Formatter.formatDate(frontmatter.date)}</span
+        >
+    </div>
+</div>

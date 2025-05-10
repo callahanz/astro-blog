@@ -1,0 +1,28 @@
+---
+import MainLayout from 'src/layouts/MainLayout.astro';
+---
+
+<MainLayout title="Imágenes (img)">
+    <h1 class="text-5xl text-white">Imágenes (img)</h1>
+
+    <!-- todas estas imagenes son de la carpeta public -->
+
+    <!-- el atributo loading es propio de html y los navegadores web; el valor por defecto si no se indica el atributo loading es 'eager' el cual carga la imagen inmediatamente-->
+    <!-- <img src="/assets/images/post-05.png" width="250" height="250" /> -->
+    <img
+        loading="eager"
+        src="/assets/images/post-05.png"
+        width="250"
+        height="250"
+    />
+
+    <div style={{ height: '3000px' }}></div>
+
+    <!-- si ponemos en loading el valor lazy cargara la imagen tan pronto entre en el campo de vision -->
+    <img
+        loading="lazy"
+        src="/assets/images/post-01.png"
+        width="250"
+        height="250"
+    />
+</MainLayout>

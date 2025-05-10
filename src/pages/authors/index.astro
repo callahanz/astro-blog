@@ -1,0 +1,24 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import { siteConfig } from 'src/config/site-config';
+import AuthorCard from 'src/components/AuthorCard.astro';
+import { getCollection } from 'astro:content';
+
+const authors = await getCollection('author');
+// console.log("🚀 ~ authors:", authors[0].constructor.name)
+// console.log("🚀 ~ authors:", Object.prototype.toString.call(authors[0]))
+// console.log("🚀 ~ authors:", Object.getPrototypeOf(authors[0]))
+const authorsSorted = authors.sort((a,b) => a.data.name.localeCompare(b.data.name));
+---
+
+<MainLayout title="Listado de autores">
+    <section class="container px-6 py-10 mx-auto">
+        <h1 class="text-3xl font-semibold text-white capitalize lg:text-4xl">
+            {siteConfig.title}
+        </h1>
+    </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {authorsSorted.map((author) => <AuthorCard author={author} />)}
+    </section>
+</MainLayout>

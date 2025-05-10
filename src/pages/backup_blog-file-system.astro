@@ -1,14 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
-
 import { siteConfig } from 'src/config/site-config';
 import MainLayout from 'src/layouts/MainLayout.astro';
-import TypedBlogPost from 'src/components/TypedBlogPost.astro';
+import BlogPost from 'src/components/BlogPost.astro';
 
-const blogPosts = await getCollection(
-    'blog',
-    (post) => post.data.isDraft === false,
-);
+// deprecated Astro.glob
+// const posts = await Astro.glob('src/pages/posts-old/*.{md,mdx}');
+const matches = import.meta.glob('src/pages/posts-old/*.{md,mdx}', { eager: true });
+const posts = Object.values(matches);
 ---
 
 <MainLayout title="Blog App">
@@ -21,21 +19,9 @@ const blogPosts = await getCollection(
                 {siteConfig.title}
             </h1>
 
-            <a class="mr-2" href="/blog/1">Blog Paginado</a>
-            <a class="mr-2" href="/authors">Autores</a>
-
             <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
-                {blogPosts.map((post) => <TypedBlogPost post={post} />)}
+                {posts.map((post) => <BlogPost {...post} />)}
             </div>
         </div>
     </section>
 </MainLayout>
-
-<style>
-    @reference 'src/styles/global.css';
-    @layer base {
-        a {
-            @apply text-blue-500 hover:underline;
-        }
-    }
-</style>

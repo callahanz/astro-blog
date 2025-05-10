@@ -1,0 +1,167 @@
+---
+import MainLayout from 'src/layouts/MainLayout.astro';
+import { Image, Picture } from 'astro:assets';
+
+// import post05Img from '@images/post-05.png';
+import post05Img from 'src/assets/images/post-05.png';
+---
+
+<MainLayout title="Imágenes (image)">
+    <h1 class="text-5xl text-white mt-5">Imágenes (image)</h1>
+
+    <pre>
+Originalmenteel archivo "post-05.png"
+es de 1024x1024
+682 KB
+    </pre>
+
+    <h1 class="text-4xl text-pink-500">En la carpeta public:</h1>
+
+    <!-- Estas imágenes se cargan desde la carpeta /public -->
+
+    <pre>
+img 1024x1024 rescaled to 250x250 (in public folder) 682 KB
+    </pre>
+    <img src="/assets/images/post-05.png" width="250" height="250" />
+
+    <!-- El componente Image de Astro cuando trabaja sobre la carpeta publica funciona exactamente igual que img no tiene ningun efecto especial. El verdadero potencial lo veremos cuando guardemos imágenes sobre la carpeta /src -->
+
+    <pre>
+Image 1024x1024 rescaled to 250x250 (in public folder) 682 KB
+    </pre>
+    <Image
+        src="/assets/images/post-05.png"
+        alt="Imágen del post"
+        width="250"
+        height="250"
+    />
+
+    <h1 class="text-4xl text-pink-500">
+        En la carpeta src (que si se optimiza):
+    </h1>
+
+    <!-- Esta imagen es de la carpeta src que si se optimiza -->
+
+    <pre>
+Image 1024x1024 rescaled to 250x250 (in src folder) 28.7 KB
+    </pre>
+    <Image src={post05Img} alt="Imágen del post" width="250" height="250" />
+
+    <!-- En este caso nada te impide darle un formato mas pequeño a la imagen pero seguira pesando mas porque tiene una anchura y altura mas grande de 500 -->
+
+    <pre>
+Image 1024x1024 rescaled to 500x500 (in src folder) 97.7 KB
+    </pre>
+    <Image src={post05Img} alt="Imágen del post" width="500" height="500" />
+
+    <!-- tambien puedes darle un formato mas pequeño a la imagen aplicando estilos pero al igual que el ejemplo anterior seguirá pesando mas porque tiene una anchura y altura mucho ás grande de 500 -->
+
+    <pre>
+Image 1024x1024 rescaled to 500x500 (in src folder) style 250x250 97.7 KB
+    </pre>
+    <Image
+        src={post05Img}
+        alt="Imágen del post"
+        width="500"
+        height="500"
+        style={{ width: '250px', height: '250px' }}
+    />
+
+    <pre>
+Image 1024x1024 rescaled to 250x250 (in src folder) Quality Low 15.9 KB
+    </pre>
+    <Image
+        src={post05Img}
+        alt="Imágen del post"
+        width="250"
+        height="250"
+        quality="low"
+    />
+
+    <pre>
+Image 1024x1024 rescaled to 250x250 (in src folder) Quality High 28.7 KB
+    </pre>
+    <Image
+        src={post05Img}
+        alt="Imágen del post"
+        width="250"
+        height="250"
+        quality="high"
+    />
+
+    <pre>
+Image 1024x1024 rescaled to 250x250 (in src folder) Formato JPG 30.6 KB
+    </pre>
+    <Image
+        src={post05Img}
+        alt="Imágen del post"
+        width="250"
+        height="250"
+        format="jpg"
+    />
+
+    <pre>
+Image 1024x1024 rescaled to 250x250 (in src folder) Formato AVIF 23.3 KB
+    </pre>
+    <Image
+        src={post05Img}
+        alt="Imágen del post"
+        width="250"
+        height="250"
+        format="avif"
+    />
+
+    <pre>
+Image 1024x1024 rescaled to 250x250 (in src folder) Picture formats ['webp', 'avif', 'jpeg']
+    </pre>
+    <Picture
+        src={post05Img}
+        alt="Imágen del post"
+        width="250"
+        height="250"
+        formats={['webp', 'avif', 'jpeg']}
+    />
+
+    <!-- Image y Picture soportan las properties widths y sizes; en este ejemplo atraves del atributo widths nos estamos creando 4 imágenes con las dimensiones de 240, 540, 720 y el ancho original de post05Img y despues con el atributo sizes definimos media-queries; le estamos diciendo que cuando el navegador web tiene su max-width de 360px coja la image de 240, cuando el max-width es de 720px va a coger la imagen de 540px, etc. -->
+
+    <pre>
+Image 1024x1024 (in src folder) Picture (widths and sizes)
+    </pre>
+    <Picture
+        src={post05Img}
+        alt="Imágen del post"
+        width={post05Img.width}
+        height={post05Img.height}
+        widths={[240, 540, 720, post05Img.width]}
+        sizes={`
+            (max-width: 360px) 240px, 
+            (max-width: 720px) 540px, 
+            (max-width: 1600px) 720px, 
+            ${post05Img.width}px
+        `}
+    />
+
+    <!-- Image y Picture tambien pueden soportar la densidad de pixeles que tiene nuestro dispositivo. -->
+
+    <pre>
+Image 1024x1024 (in src folder) Picture (densities)
+    </pre>
+    <Picture
+        src={post05Img}
+        alt="Imágen del post"
+        width={post05Img.width / 2}
+        densities={[1.5, 2]}
+    />
+</MainLayout>
+
+<style>
+    @reference 'src/styles/global.css';
+    @layer base {
+        h1 {
+            @apply mt-20;
+        }
+        pre {
+            @apply text-white mt-20;
+        }
+    }
+</style>

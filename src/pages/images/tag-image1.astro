@@ -1,0 +1,25 @@
+---
+import MainLayout from 'src/layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+
+// import post05Img from '@images/post-05.png';
+import post05Img from 'src/assets/images/post-05.png';
+---
+
+<MainLayout title="Imágenes (image)">
+    <h1 class="text-5xl text-white">Imágenes (image)</h1>
+
+    <!-- esta imagen es de la carpeta public -->
+    <img src="/assets/images/post-05.png" width="250" height="250" />
+
+    <!-- el componente Image de Astro cuando trabaja sobre la carpeta publica funciona exactamente igual que img no tiene ningun efecto especial.  El verdadero potencial lo veremos cuando guardemos imágenes sobre la carpeta /src -->
+    <!-- <Image
+        src="/assets/images/post-05.png"
+        alt="Imágen del post"
+        width="250"
+        height="250"
+    /> -->
+
+    <!-- esta imagen es de la carpeta src que si se optimiza -->
+    <Image src={post05Img} alt="Imágen del post" width="250" height="250" />
+</MainLayout>

@@ -15,5 +15,6 @@ export default defineConfig({
   integrations: [mdx()],
 
   /* este site va a fallar cuando estemos en produccion es solo un ejemplo */
-  site: 'https://example.com',
+  /* site: 'https://example.com', */
+  site: 'https://astro-blog-agz.netlify.app/',
 });

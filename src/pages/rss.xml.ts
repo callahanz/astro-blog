@@ -34,7 +34,7 @@ export const GET: APIRoute = async (context) => {
             description: post.data.description,
             // Compute RSS link from post `id`
             // This example assumes all posts are rendered as `/blog/[id]` routes
-            link: `/blog/${post.id}/`,
+            link: `/posts/${post.id}/`,
         })),
         // (optional) inject custom xml
         customData: `<language>en-us</language>`,

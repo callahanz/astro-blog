@@ -12,5 +12,8 @@ export default defineConfig({
     build: { sourcemap: process.env.NODE_ENV === 'development' },
   },
 
-  integrations: [mdx()]
+  integrations: [mdx()],
+
+  /* este site va a fallar cuando estemos en produccion es solo un ejemplo */
+  site: 'https://example.com',
 });

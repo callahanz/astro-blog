@@ -26,11 +26,12 @@ tags: [JavaScript, ES6, Programming]
 # isDraft: true
 ---
 
-# {frontmatter.title}
+<!-- # {frontmatter.title} podriamos usar esto si el archivo fuera un .mdx y si queremos usar los mdx con los rss feeds necesitamos instalar un plugin. Por ese motivo hemos puesto el titulo directamente y hemos renombrado el archivo como .md -->
+# Explorando Funciones de ES6
 
-{/* <!-- Mostrar imagen --> */}
-{/* <img src="/assets/images/post-01.png" width="350" alt="Explorando Funciones de ES6" /> */}
-{/* Ahora mostraremos la imagen dinamicamente desde [slug].astro */}
+<!-- {/* Mostrar imagen */} -->
+<!-- {/* <img src="/assets/images/post-01.png" width="350" alt="Explorando Funciones de ES6" /> */} -->
+<!-- {/* Ahora mostraremos la imagen dinamicamente desde [slug].astro */} -->
 
 JavaScript ES6 introdujo varias funciones nuevas que han hecho que la codificación en JavaScript sea más eficiente y agradable. Vamos a explorar algunas de estas funciones.
 
